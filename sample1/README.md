@@ -1,4 +1,4 @@
-# go-sam-restapi-ex1
+# sample1
 
 This is a sample template for go-sam-restapi-ex1 - Below is a brief explanation of what we have generated for you:
 
