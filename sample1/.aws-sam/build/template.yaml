@@ -1,0 +1,63 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'example1
+
+  Sample SAM Template for example1
+
+  '
+Globals:
+  Function:
+    Timeout: 5
+Resources:
+  SampleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: SampleFunction
+      Handler: sample1
+      Runtime: go1.x
+      Architectures:
+      - x86_64
+      Tracing: Active
+      Events:
+        RegisterUser:
+          Type: Api
+          Properties:
+            Path: /users/register
+            Method: POST
+        GetUser:
+          Type: Api
+          Properties:
+            Path: /users/{userId}
+            Method: GET
+        GetUserAll:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: GET
+        UpdateUser:
+          Type: Api
+          Properties:
+            Path: /users/{userId}
+            Method: GET
+        DeleteUser:
+          Type: Api
+          Properties:
+            Path: /users/{userId}
+            Method: PATCH
+Outputs:
+  SampleRestAPI:
+    Description: API Gateway endpoint URL for Prod environment for First Function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/
+  SampleFunction:
+    Description: First Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunction
+      - Arn
+  SampleFunctionIamRole:
+    Description: Implicit IAM Role created for Hello World function
+    Value:
+      Fn::GetAtt:
+      - HelloWorldFunctionRole
+      - Arn
